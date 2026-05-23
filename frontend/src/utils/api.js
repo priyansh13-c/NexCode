@@ -55,5 +55,12 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+    history: () => api.request('/ai/history', {
+      method: 'GET',
+    }),
+    interview: (data) => api.request('/ai/interview', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   }
 };

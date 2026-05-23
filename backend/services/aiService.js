@@ -2,12 +2,12 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 exports.evaluateCode = async (language, sourceCode, userPrompt = '') => {
   try {
-    // Initialize inside to ensure process.env is loaded
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const prompt = `
-    Act as an expert AI Coding Mentor and Interviewer. Evaluate the following code submission.
+    You are a senior technical interviewer and coding mentor at a top global MNC with experience interviewing over 1000 candidates.
+    Evaluate the following submission as if you were interviewing a real candidate.
     Language: ${language}
     Code:
     ${sourceCode}
@@ -31,10 +31,37 @@ exports.evaluateCode = async (language, sourceCode, userPrompt = '') => {
     `;
 
     const result = await model.generateContent(prompt);
-    const response = result.response;
-    return response.text();
+    return result.response.text();
   } catch (error) {
     console.error('Gemini API Error:', error);
     throw new Error('Failed to generate AI evaluation.');
+  }
+};
+
+exports.interviewConversation = async (language, transcript, conversation = []) => {
+  try {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+
+    const conversationContext = conversation
+      .map((message) => `${message.role === 'user' ? 'Candidate:' : 'Interviewer:'} ${message.content}`)
+      .join('\n');
+
+    const prompt = `
+    You are a senior interviewer at a top global MNC who has interviewed over 1000 candidates.
+    Conduct a mock interview and give guidance like an experienced hiring manager.
+    Language: ${language}
+
+    ${conversationContext ? `Conversation so far:\n${conversationContext}` : ''}
+    Candidate says: ${transcript}
+
+    Respond with a thoughtful, professional interviewer answer. Provide feedback on the answer, follow up with the next interview-style question, and keep the tone realistic and constructive.
+    `;
+
+    const result = await model.generateContent(prompt);
+    return result.response.text();
+  } catch (error) {
+    console.error('Gemini API Error:', error);
+    throw new Error('Failed to generate mock interview response.');
   }
 };

@@ -160,19 +160,20 @@ p {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  --section-divider: 2px;
 }
 
 .sidebar {
   width: 250px;
   background-color: var(--input-bg);
-  border-right: 1px solid var(--border-color);
+  border-right: var(--section-divider) solid var(--border-color);
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-header {
   padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: var(--section-divider) solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -193,7 +194,7 @@ p {
 
 .toolbar {
   height: 50px;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: var(--section-divider) solid var(--border-color);
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -214,7 +215,7 @@ p {
 
 .output-panel {
   height: 250px;
-  border-top: 1px solid var(--border-color);
+  border-top: var(--section-divider) solid var(--border-color);
   background-color: var(--input-bg);
   display: flex;
   flex-direction: column;
@@ -222,7 +223,7 @@ p {
 
 .output-header {
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: var(--section-divider) solid var(--border-color);
   font-size: 0.875rem;
   font-weight: 600;
   display: flex;
@@ -241,7 +242,7 @@ p {
 .mentor-panel {
   width: 350px;
   background-color: var(--bg-color);
-  border-left: 1px solid var(--border-color);
+  border-left: var(--section-divider) solid var(--border-color);
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
@@ -249,7 +250,7 @@ p {
 
 .mentor-header {
   padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: var(--section-divider) solid var(--border-color);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -280,6 +281,131 @@ p {
   padding: 0.1rem 0.3rem;
   border-radius: 0.25rem;
   font-family: monospace;
+}
+
+.sidebar-link {
+  padding: 0.75rem 0.75rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--primary-color);
+}
+
+.language-select {
+  min-width: 140px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.language-select:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary-color);
+  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
+}
+
+.language-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+.toolbar-divider-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.toolbar-divider-control input[type="range"] {
+  width: 120px;
+}
+
+.panel-loading {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-item {
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: var(--input-bg);
+}
+
+.history-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.history-feedback {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.history-code pre {
+  background-color: var(--bg-color);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.interview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.interview-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.interview-transcript, .interview-response {
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  min-height: 140px;
+  background: var(--input-bg);
+  overflow-y: auto;
+}
+
+.speaker-line {
+  margin-bottom: 0.5rem;
+}
+
+.speaker-user {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.speaker-assistant {
+  color: var(--primary-color);
+}
+
+.ai-answer {
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .mentor-content pre {
