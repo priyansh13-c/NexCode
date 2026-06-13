@@ -89,12 +89,5 @@ The frontend runs on Vite and will typically be available at `http://localhost:5
 - `frontend/src/main.js` - frontend entry point
 - `frontend/src/pages/` - page views for authentication and dashboard
 
-## Notes
 
-- The current implementation excludes interview-related features.
-- Ensure the backend is running before using the frontend client.
-- Review the backend service configuration if you switch AI providers or execution engines.
 
-## License
-
-This project does not include a license file. Add one if you plan to share or publish the code.
